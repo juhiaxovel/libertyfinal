@@ -11,7 +11,7 @@ import { IPolicyInput, PolicyInput, Policy, ClaimDetail } from './models/models'
   providedIn: 'root'
 })
 export class LibertyService {
-  private baseUrl = 'http://34.73.3.99:8080/1.0';
+  private baseUrl = 'http://34.73.3.99/1.0';
 
   constructor(
     private httpClient: HttpClient
