@@ -18,7 +18,7 @@
                   <p class="text-danger form-error" *ngIf="(policyForm.controls['policyNumber'].dirty && policyForm.controls['policyText'].dirty) &&(policyForm.controls['policyNumber'].invalid || policyForm.controls['policyText'].invalid)">{{policyFormValidationMessages.policyNumber}}</p>
                 </div>
                 <div class="note-text mt-md-2">
-                  <p><span>Note:</span> Policy No. with 4 digits only needs to add prefix 0 (e.g. Policy No: GHS1234 Input: GHS01234)</p>
+                  <p><span>Note:</span> Add prefix 0 before the 4-digit Policy No. (e.g. Policy No: GHS1234 Input: GHS01234)</p>
                 </div>
                 <div class="form-group">
                   <label for="cerificate">Certificate Number<span class="text-danger">*</span></label><div class="d-inline-block tooltip-icon mb-2 ml-2"><span class="tooltiptext">Lorem Ipsum</span><img src="../../assets/images/info-icon.png"></div>

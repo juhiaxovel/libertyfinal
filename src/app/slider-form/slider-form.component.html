@@ -109,7 +109,7 @@
                       </div>
                     </div>
                 <div class="input-group">
-                    <input type="text" class="form-control" (keyup)="showDiagList()" [(ngModel)]="dSearchStr">
+                    <input type="text" class="form-control" placeholder="Type to narrow down the options" (keyup)="showDiagList()" [(ngModel)]="dSearchStr">
                     <ul class="list-group-popup" *ngIf="showDiagPopup">
                       <li (click)="selectDiag(diagnosis)" *ngFor="let diagnosis of diagnosisNameSearchArray | selectDiagFilter : dSearchStr : diagnosisNameSearchArray">{{removeSpecialChars(diagnosis.diagnosisDescription)}}</li>
                     </ul>
