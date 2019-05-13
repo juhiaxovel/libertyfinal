@@ -12,66 +12,7 @@ input[type=number]::-webkit-outer-spin-button{ -webkit-appearance: none;
     -moz-appearance: none; appearance: none;}
 ::placeholder{font-size: 14px;}
 ::-moz-placeholder{font-size: 14px;}
-.tooltip-icon {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .tooltip-icon .tooltiptext {
-    font-size: 14px;
-    visibility: hidden;
-    background-color: #fff;
-    color: #808080;
-    text-align: center;
-    border-radius: 6px;
-    padding: 10px 10px;
-    border: 1px solid #d7d7d7;
-    box-shadow: 0 3px 3px #d7d7d7;
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-    bottom: 100%;
-    margin-left: -21px;
-    left: 0;
-    margin-bottom: 14px;
-  }
-  .tooltiptext p{margin-bottom: 0px;color: #808080;}
-  
-  .tooltip-icon:hover .tooltiptext {
-    visibility: visible;
-  }
-  .tooltip-icon .tooltiptext::after {
-    content: " ";
-    position: absolute;
-    top: 77%;
-    left: 25px;
-    margin-left: -5px;
-    border:none;
-    border-top: 1px solid #d7d7d7;
-    border-left: 1px solid #d7d7d7;
-    height: 20px;
-    width: 20px;
-    transform: rotate(-135deg);
-    background: #fff;
-    box-shadow: -3px -3px 2px 0px rgba(215, 215, 215, 0.77);
-  }
-  .tooltip-icon .tooltiptext.t-position::after{
-    top: 85%;
-}
+
 .hyphen-col{color: #7b7b7b;}
 .form-error{font-size: 14px;}
 a{color: #3b75ae;}
-@media only screen and (min-width: 768px) {
-  .tooltip-icon .tooltiptext{width: 380px;}
-}
-@media only screen and (max-width: 767px) {
-  .tooltip-icon .tooltiptext{width: 290px;}
-  .tooltip-icon .tooltiptext::after{top: 85%;}
-  .tooltip-icon .tooltiptext.t-position::after{top: 90%;}
-}
-@media only screen and (max-width: 576px) {
-  .tooltip-icon .tooltiptext{width: 210px;left: auto;right: -20px;}
-  .tooltip-icon .tooltiptext::after{left: auto;right: 20px;}
-  .tooltip-icon .tooltiptext.t-position::after{top: 92%;}
-  .note-text p{font-size: 12px;}
-}

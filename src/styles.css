@@ -30,11 +30,7 @@ body{background: #f5f5f5;font-family: "OpenSans-Regular";}
 ul{margin: 0;padding: 0;}
 ul li{list-style: none;}
 p{color: #1a1446;}
-.policy-deatil-card{background: #fff;border: 1px solid #d9d9d9;box-shadow: 0px 0px 5px 0px #d9d9d9; margin:30px auto;padding: 15px 30px;position: relative;-webkit-transition:  all linear 0.5s;
-  -moz-transition: all linear 0.5s;
-  -o-transition: all linear 0.5s;
-  -ms-transition: all linear 0.5s;;
-  transition: all linear 0.5s;}
+.policy-deatil-card{background: #fff;border: 1px solid #d9d9d9;box-shadow: 0px 0px 5px 0px #d9d9d9; margin:30px auto;padding: 15px 30px;position: relative;min-height: 530px;}
 .title h1{font-size: 26px;color: #1a1446;line-height: 30px;}
 .title p{font-size: 14px;color: #808080;}
 .policy-deatil-card .form-group label{font-size: 14px;color: #343741;}
@@ -53,6 +49,64 @@ router-outlet ~ * {
   height: 100%;
   width: 100%;
 }
+.tooltip-icon {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-icon .tooltiptext {
+  font-size: 14px;
+  visibility: hidden;
+  background-color: #fff;
+  color: #808080;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px 10px;
+  border: 1px solid #d7d7d7;
+  box-shadow: 0 3px 3px #d7d7d7;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  margin-left: -21px;
+  left: 0;
+  margin-bottom: 14px;
+}
+.tooltiptext p{margin-bottom: 0px;color: #808080;}
+
+.tooltip-icon:hover .tooltiptext {
+  visibility: visible;
+}
+.tooltip-icon .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 77%;
+  left: 25px;
+  margin-left: -5px;
+  border:none;
+  border-top: 1px solid #d7d7d7;
+  border-left: 1px solid #d7d7d7;
+  height: 20px;
+  width: 20px;
+  transform: rotate(-135deg);
+  background: #fff;
+  box-shadow: -3px -3px 2px 0px rgba(215, 215, 215, 0.77);
+}
+.tooltip-icon .tooltiptext.t-position::after{
+  top: 85%;
+}
+@media only screen and (min-width: 768px) {
+  .tooltip-icon .tooltiptext{width: 380px;}
+}
 @media only screen and (max-width: 767px) {
   [class*=' col-'],.col-12{padding-left: 0px;padding-right: 0px;} 
+  .tooltip-icon .tooltiptext{width: 290px;}
+  .tooltip-icon .tooltiptext::after{top: 85%;}
+  .tooltip-icon .tooltiptext.t-position::after{top: 90%;}
+}
+@media only screen and (max-width: 576px) {
+  .tooltip-icon .tooltiptext{width: 210px;left: auto;right: -20px;}
+  .tooltip-icon .tooltiptext::after{left: auto;right: 20px;}
+  .tooltip-icon .tooltiptext.t-position::after{top: 92%;}
+  .note-text p{font-size: 12px;}
 }

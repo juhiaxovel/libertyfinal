@@ -49,7 +49,13 @@
           </div>
           <div class="d-md-flex">
             <div class="d-flex flex-wrap w-100">
+                <div class="d-flex align-items-center tooltip-in">
                 <p class="cal-top-text">Type date or select from the calender</p>
+                <div class="d-inline-block tooltip-icon mb-2 ml-2">
+                    <span class="tooltiptext t-position">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</span>
+                    <img src="../../assets/images/info-icon.png">
+                </div>
+                </div>
                 <div class="full-calender mb-4"><ejs-datepicker id='datepicker' [(value)]="selectedAnswers[2]" (change)="consultDate(calender)" placeholder='Select a date' #calender></ejs-datepicker></div>
                 <div class="dt-btn"><button class="btn btn-light" (click)="prevDate(calender)">Yesterday?</button></div>
             </div>
@@ -61,9 +67,15 @@
                 <p>Tell us the name of your doctor or clinic</p>
             </div>
                 <div class="wrap-doctor-list">
-                <p class="cal-top-text">Type to narrow down the options</p>
+                  <div class="d-flex align-items-center tooltip-in">
+                    <p class="cal-top-text">Type to narrow down the options</p>
+                    <div class="d-inline-block tooltip-icon mb-2 ml-2">
+                      <span class="tooltiptext t-position">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</span>
+                      <img src="../../assets/images/info-icon.png">
+                    </div>
+                  </div>
                 <div class="input-group">
-                    <input type="text" class="form-control" (keyup)="showSearchList()" [(ngModel)]="searchStr">
+                    <input type="text" class="form-control" placeholder="Doctor or Clinic name" (keyup)="showSearchList()" [(ngModel)]="searchStr">
                     <ul class="list-group-popup" *ngIf="showPopup">
                       <li [innerHTML]="highlightSearch(doctor.name)" (click)="selectDoctor(doctor.name)" *ngFor="let doctor of doctorNameSearchArray | selectDoctorFilter : searchStr : doctorNameSearchArray"></li>
                     </ul>
@@ -89,7 +101,13 @@
               <p>Tell us the diagnosis given by the doctor</p>
           </div>
               <div class="wrap-doctor-list">
-                <p class="cal-top-text">Type to narrow down the options</p>
+                  <div class="d-flex align-items-center">
+                      <p class="cal-top-text">Type to narrow down the options</p>
+                      <div class="d-inline-block tooltip-icon mb-2 ml-2">
+                        <span class="tooltiptext t-position">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</span>
+                        <img src="../../assets/images/info-icon.png">
+                      </div>
+                    </div>
                 <div class="input-group">
                     <input type="text" class="form-control" (keyup)="showDiagList()" [(ngModel)]="dSearchStr">
                     <ul class="list-group-popup" *ngIf="showDiagPopup">
@@ -124,7 +142,7 @@
                   </select>
               </div>
               <div class="form-group wd-recipt-box">
-                  <input type="text" [(ngModel)]="price" class="form-control" id="price">
+                  <input type="number" [(ngModel)]="price" class="form-control" id="price">
               </div>
           </div>
           </div>
@@ -132,25 +150,25 @@
           <div class="d-flex justify-content-around mb-4" *ngIf="showScreen > 1 && selectedAnswers.length > 0">
               <div class="side-show-text">
                 <div class="icon-before">
-                  <h3>{{selectedAnswers[0].mmrlnm}}</h3><p>you are claiming for</p>
+                  <p>You are claiming for</p><h3>{{selectedAnswers[0].mmrlnm}}</h3>
                 </div>
               </div>
               <div class="edit-btn"><button class="btn" (click)="showScreen = screenArray[0]">Edit</button></div>
           </div>
           <div class="d-flex justify-content-around mb-4" *ngIf="showScreen > 2 && selectedAnswers.length > 1">
-                <div class="side-show-text"><div class="icon-before"><h3>{{selectedAnswers[1].claimTypeDescription}}</h3><p>your claim type</p></div></div>
+                <div class="side-show-text"><div class="icon-before"><p>Your claim type</p><h3>{{selectedAnswers[1].claimTypeDescription}}</h3></div></div>
                 <div class="edit-btn"><button class="btn" (click)="showScreen = screenArray[1]">Edit</button></div>
           </div>
           <div class="d-flex justify-content-around mb-4" *ngIf="showScreen > 3 && selectedAnswers.length > 2">
-                  <div class="side-show-text"><div class="icon-before"><h3>{{selectedAnswers[2] | date: 'EEEE, MMMM d, y'}}</h3><p>Date of your medical consultation</p></div></div>
+                  <div class="side-show-text"><div class="icon-before"><p>Date of your medical consultation</p><h3>{{selectedAnswers[2] | date: 'EEEE, MMMM d, y'}}</h3></div></div>
                   <div class="edit-btn"><button class="btn" (click)="showScreen = screenArray[2]">Edit</button></div>
           </div>
           <div class="d-flex justify-content-around mb-4" *ngIf="showScreen > 4 && selectedAnswers.length > 3">
-                <div class="side-show-text"><div class="icon-before"><h3>{{selectedAnswers[3]}}</h3><p>Your Doctor</p></div></div>
+                <div class="side-show-text"><div class="icon-before"><p>Your Doctor</p><h3>{{selectedAnswers[3]}}</h3></div></div>
                 <div class="edit-btn"><button class="btn" (click)="showScreen = screenArray[3]">Edit</button></div>
           </div>
           <div class="d-flex justify-content-around mb-4" *ngIf="showScreen > 5 && selectedAnswers.length > 4">
-                  <div class="side-show-text"><div class="icon-before"><h3>{{removeSpecialChars(selectedAnswers[4])}}</h3><p>Your Diagnosis</p></div></div>
+                  <div class="side-show-text"><div class="icon-before"><p>Your Diagnosis</p><h3>{{removeSpecialChars(selectedAnswers[4])}}</h3></div></div>
                   <div class="edit-btn"><button class="btn" (click)="showScreen = screenArray[4]">Edit</button></div>
           </div>
       </div>    

@@ -66,7 +66,7 @@ ul.list-group-popup li{cursor: pointer;margin-bottom: 5px;font-size: 14px;color:
   margin-bottom: 0px;padding: 5px;}
 .e-input-group, .e-input-group.e-control-wrapper{border: 1px solid #ccc;}
 input#datepicker_input{padding: 5px 10px !important;}
-p.cal-top-text{font-size: 14px;color: #1a1446;margin-bottom: 10px;}
+.cal-top-text{font-size: 14px;color: #1a1446;margin-bottom: 10px;}
 .wd-recipt-box select{background-image: url("../../assets/images/arrow-border.png");background-repeat: no-repeat;background-position: 90% center;-webkit-appearance: none; 
   -moz-appearance: none;appearance: none;}
 .wd-recipt-box input,.wd-recipt-box select{border-radius: 2px;height: calc(1.9em + .75rem + 2px);}
