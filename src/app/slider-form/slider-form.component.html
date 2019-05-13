@@ -1,0 +1,165 @@
+<div class="container">
+  <div class="policy-deatil-card">
+    <div class="col-md-6">
+      <div class="progress-rate mb-3">
+        <p><span>{{calcProgressBarPercent()}}%</span> complete</p>
+        <div class="progress">
+          <div class="progress-bar" [style.width]="calcProgressBarPercent()+'%'"></div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="loading" class="loader-overlay d-flex align-items-center justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+    </div>
+    <div class="wrap-screen-sidebar d-md-flex">
+      <div class="change-screen col-md-6" [@slideInOut] *ngIf="showScreen == screenArray[0]">
+        <div class="title mb-4">
+          <h1>Who are you claiming for?</h1>
+          <p>Please select the insured member you are claiming for below</p>
+        </div>
+        <div class="d-md-flex">
+          <div class="d-flex flex-wrap d-max-screen w-100">
+            <div class="radio-box" *ngFor="let insuredMember of insuredMemberArray">
+              <input type="radio" name="insured-member" (click)="makeSelected(insuredMember, 1)" value="{{insuredMember.mmrlnm}}" [checked]="selectedAnswers.length > 0 && insuredMember.mmrlnm == selectedAnswers[0].mmrlnm">
+              <label>{{insuredMember.mmrlnm}}</label>
+            </div>
+          </div>
+        </div>  
+      </div>
+      <div class="change-screen col-md-6" [@slideInOut] *ngIf="showScreen == screenArray[1]">
+        <div class="title mb-4">
+          <h1>What is your Claim Type?</h1>
+          <p>Select one of the options below</p>
+        </div>
+        <div class="d-md-flex">
+          <div class="d-flex flex-wrap d-max-screen w-100">
+            <div class="radio-box" *ngFor="let memberType of memberTypeArray; let i=index">
+              <input type="radio"  name="member-type" (click)="makeClaimSelected(memberType, 2, i)" value="{{memberType.claimTypeDescription}}" [checked]="selectedAnswers.length > 1 && memberType.claimTypeDescription == selectedAnswers[1].claimTypeDescription">
+              <label>{{memberType.claimTypeDescription}}</label>
+            </div>
+          </div>
+        </div>  
+      </div>
+      <div class="change-screen col-md-6" [@slideInOut] *ngIf="showScreen == screenArray[2]">
+          <div class="title mb-4">
+              <h1>When was your consultation?</h1>
+              <p>Let us know the date of your medical consultation</p>
+          </div>
+          <div class="d-md-flex">
+            <div class="d-flex flex-wrap w-100">
+                <p class="cal-top-text">Type date or select from the calender</p>
+                <div class="full-calender mb-4"><ejs-datepicker id='datepicker' [(value)]="selectedAnswers[2]" (change)="consultDate(calender)" placeholder='Select a date' #calender></ejs-datepicker></div>
+                <div class="dt-btn"><button class="btn btn-light" (click)="prevDate(calender)">Yesterday?</button></div>
+            </div>
+          </div>  
+      </div>
+      <div class="change-screen col-md-6" *ngIf="showScreen == screenArray[3]">
+            <div class="title mb-4">
+                <h1>What was the name of the Doctor or Clinic?</h1>
+                <p>Tell us the name of your doctor or clinic</p>
+            </div>
+                <div class="wrap-doctor-list">
+                <p class="cal-top-text">Type to narrow down the options</p>
+                <div class="input-group">
+                    <input type="text" class="form-control" (keyup)="showSearchList()" [(ngModel)]="searchStr">
+                    <ul class="list-group-popup" *ngIf="showPopup">
+                      <li [innerHTML]="highlightSearch(doctor.name)" (click)="selectDoctor(doctor.name)" *ngFor="let doctor of doctorNameSearchArray | selectDoctorFilter : searchStr : doctorNameSearchArray"></li>
+                    </ul>
+                    <div class="input-group-append">
+                    <button class="btn btn-secondary search-btn" type="button">
+                        <img src="../../assets/images/search-icon.png">
+                    </button>
+                    </div>
+                </div>
+                <div class="search-select-list mt-4 d-none d-md-block">
+                    <p>or pick from the past doctors</p>
+                    <div class="d-flex flex-wrap d-max-screen">
+                    <ul class="doctors-list  w-100">
+                        <li (click)="selectDoctor(doctorName.name)" *ngFor="let doctorName of doctorNameArray">{{doctorName.name}}</li> 
+                    </ul>
+                    </div>
+                </div>    
+                </div>
+      </div>
+      <div class="change-screen col-md-6" *ngIf="showScreen == screenArray[4]">
+          <div class="title mb-4">
+              <h1>What was your diagnosis?</h1>
+              <p>Tell us the diagnosis given by the doctor</p>
+          </div>
+              <div class="wrap-doctor-list">
+                <p class="cal-top-text">Type to narrow down the options</p>
+                <div class="input-group">
+                    <input type="text" class="form-control" (keyup)="showDiagList()" [(ngModel)]="dSearchStr">
+                    <ul class="list-group-popup" *ngIf="showDiagPopup">
+                      <li (click)="selectDiag(diagnosis)" *ngFor="let diagnosis of diagnosisNameSearchArray | selectDiagFilter : dSearchStr : diagnosisNameSearchArray">{{removeSpecialChars(diagnosis.diagnosisDescription)}}</li>
+                    </ul>
+                    <div class="input-group-append">
+                    <button class="btn btn-secondary search-btn" type="button">
+                        <img src="../../assets/images/search-icon.png">
+                    </button>
+                    </div>
+                </div>   
+              </div>
+              <div class="search-select-list mt-4">
+                  <div class="d-flex flex-wrap d-max-screen">
+                    <div class="radio-box" *ngFor="let diagnosis of diagnosisNameArray">
+                        <input type="radio" id="{{diagnosis.diagnosisCode}}" (click)="makeDiag(diagnosis.diagnosisDescription, 5)" name="radio-group" value="1">
+                        <label>{{removeSpecialChars(diagnosis.diagnosisDescription)}}</label>
+                    </div>
+                  </div>  
+               </div>
+      </div>
+      <div class="change-screen col-md-6" *ngIf="showScreen == screenArray[5]">
+          <div class="title mb-4">
+              <h1>What is the receipt amount?</h1>
+              <p>Enter the receipt amount</p>
+          </div>
+          <div class="d-flex">
+              <div class="form-group mr-3 wd-recipt-box">
+                  <select [(ngModel)]="currency" class="form-control" id="sel1">
+                      <option>HKD</option>
+                      <option>INR</option>
+                  </select>
+              </div>
+              <div class="form-group wd-recipt-box">
+                  <input type="text" [(ngModel)]="price" class="form-control" id="price">
+              </div>
+          </div>
+          </div>
+      <div class="col-md-6" [ngClass]="{'display-sidebar' : showScreen > 1 && showScreen < screenArray.length}"> 
+          <div class="d-flex justify-content-around mb-4" *ngIf="showScreen > 1 && selectedAnswers.length > 0">
+              <div class="side-show-text">
+                <div class="icon-before">
+                  <h3>{{selectedAnswers[0].mmrlnm}}</h3><p>you are claiming for</p>
+                </div>
+              </div>
+              <div class="edit-btn"><button class="btn" (click)="showScreen = screenArray[0]">Edit</button></div>
+          </div>
+          <div class="d-flex justify-content-around mb-4" *ngIf="showScreen > 2 && selectedAnswers.length > 1">
+                <div class="side-show-text"><div class="icon-before"><h3>{{selectedAnswers[1].claimTypeDescription}}</h3><p>your claim type</p></div></div>
+                <div class="edit-btn"><button class="btn" (click)="showScreen = screenArray[1]">Edit</button></div>
+          </div>
+          <div class="d-flex justify-content-around mb-4" *ngIf="showScreen > 3 && selectedAnswers.length > 2">
+                  <div class="side-show-text"><div class="icon-before"><h3>{{selectedAnswers[2] | date: 'EEEE, MMMM d, y'}}</h3><p>Date of your medical consultation</p></div></div>
+                  <div class="edit-btn"><button class="btn" (click)="showScreen = screenArray[2]">Edit</button></div>
+          </div>
+          <div class="d-flex justify-content-around mb-4" *ngIf="showScreen > 4 && selectedAnswers.length > 3">
+                <div class="side-show-text"><div class="icon-before"><h3>{{selectedAnswers[3]}}</h3><p>Your Doctor</p></div></div>
+                <div class="edit-btn"><button class="btn" (click)="showScreen = screenArray[3]">Edit</button></div>
+          </div>
+          <div class="d-flex justify-content-around mb-4" *ngIf="showScreen > 5 && selectedAnswers.length > 4">
+                  <div class="side-show-text"><div class="icon-before"><h3>{{removeSpecialChars(selectedAnswers[4])}}</h3><p>Your Diagnosis</p></div></div>
+                  <div class="edit-btn"><button class="btn" (click)="showScreen = screenArray[4]">Edit</button></div>
+          </div>
+      </div>    
+    </div>
+    <div *ngIf="showScreen > 2 && showScreen < screenArray.length" class="next-btn-container d-flex justify-content-center justify-content-md-end">
+        <button class="btn btn-primary" (click)="nextScreen()" [disabled]="checkIfInvalid()" enable>Next</button>
+      </div>
+    <div *ngIf="showScreen == screenArray.length" class="next-btn-container d-flex justify-content-center justify-content-md-end">
+        <button class="btn btn-primary" (click)="submitForm()" [disabled]="!price || !currency" enable>Submit</button>
+    </div>
+  </div>
+</div>
