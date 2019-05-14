@@ -16,3 +16,7 @@ input[type=number]::-webkit-outer-spin-button{ -webkit-appearance: none;
 .hyphen-col{color: #7b7b7b;}
 .form-error{font-size: 14px;}
 a{color: #3b75ae;}
+@media only screen and (max-width: 767px) {
+  .lg-input-wd{width: 62%;}
+  .sm-input-wd{width: 30%;}
+}
